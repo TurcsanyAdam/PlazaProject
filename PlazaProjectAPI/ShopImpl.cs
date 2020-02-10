@@ -17,6 +17,29 @@ namespace PlazaProjectAPI
         }
         private class ShopEntryImpl
         {
+            private Product product { get; set; }
+            private int quantity { get; set; }
+            private float price { get; set; }
+            private ShopEntryImpl(Product product, int quantity, float price)
+            {
+                this.product = product;
+                this.quantity = quantity;
+                this.price = price;
+            }
+
+            public void IncreaseQuantity(int amount)
+            {
+                quantity += amount;
+            }
+
+            public void DecreaseQuantity(int amount)
+            {
+                quantity -= amount;
+            }
+            public string ToString()
+            {
+
+            }
 
         }
 
