@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlazaProject", "PlazaProject\PlazaProject.csproj", "{C7F7F0C7-878D-47F0-87B6-BEB14D433150}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlazaProjectAPI", "PlazaProjectAPI\PlazaProjectAPI.csproj", "{E3D0825D-725A-44EB-9D11-04F3D493102F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlazaProject_API", "PlazaProject_API\PlazaProject_API.csproj", "{27C7A13D-BBBE-4FA3-B3C5-1612B537DF09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{C7F7F0C7-878D-47F0-87B6-BEB14D433150}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7F7F0C7-878D-47F0-87B6-BEB14D433150}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7F7F0C7-878D-47F0-87B6-BEB14D433150}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E3D0825D-725A-44EB-9D11-04F3D493102F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E3D0825D-725A-44EB-9D11-04F3D493102F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E3D0825D-725A-44EB-9D11-04F3D493102F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E3D0825D-725A-44EB-9D11-04F3D493102F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27C7A13D-BBBE-4FA3-B3C5-1612B537DF09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27C7A13D-BBBE-4FA3-B3C5-1612B537DF09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27C7A13D-BBBE-4FA3-B3C5-1612B537DF09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27C7A13D-BBBE-4FA3-B3C5-1612B537DF09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PlazaProjectAPI\PlazaProjectAPI.csproj" />
+    <ProjectReference Include="..\PlazaProject_API\PlazaProject_API.csproj" />
   </ItemGroup>
 
 </Project>
