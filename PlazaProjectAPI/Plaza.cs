@@ -35,9 +35,9 @@ namespace PlazaProjectAPI
 
         }
 
-        public string ToString()
+        public override string ToString()
         {
-
+            return base.ToString();
         }
     }
 }
