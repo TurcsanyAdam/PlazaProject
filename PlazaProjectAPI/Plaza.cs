@@ -6,31 +6,31 @@ namespace PlazaProjectAPI
 {
     interface Plaza
     {
-        private List<Shop> getShops()
+        private List<Shop> GetShops()
         {
 
         }
-        private void addShop(Shop shop)
+        private void AddShop(Shop shop)
         {
 
         }
-        private void removeShop(Shop shop)
+        private void RemoveShop(Shop shop)
         {
 
         }
-        private Shop findShopByName(string name)
+        private Shop FindShopByName(string name)
         {
 
         }
-        private bool isOpen()
+        private bool IsOpen()
         {
 
         }
-        private void open()
+        private void Open()
         {
 
         }
-        private void close()
+        private void Close()
         {
 
         }
