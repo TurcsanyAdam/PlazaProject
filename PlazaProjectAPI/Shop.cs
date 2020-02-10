@@ -6,60 +6,60 @@ namespace PlazaProjectAPI
 {
     interface Shop
     {
-        private string GetName()
+        public string GetName()
         {
 
         }
 
-        private string GetOwner()
+        public string GetOwner()
         {
 
         }
-        private bool IsOpen()
+        public bool IsOpen()
         {
 
         }
-        private void Open()
+        public void Open()
         {
 
         }
-        private void Close()
+        public void Close()
         {
 
         }
-        private List<Products> GetProducts()
+        public List<Products> GetProducts()
         {
 
         }
-        private Product FindByName(string name)
+        public Product FindByName(string name)
         {
 
         }
-        private float GetPrice(long barcode)
+        public float GetPrice(long barcode)
         {
             
         }
-        private bool HasProduct(long barcode)
+        public bool HasProduct(long barcode)
         {
 
         }
-        private void AddNewProduct(Product product, int quantity, float price)
+        public void AddNewProduct(Product product, int quantity, float price)
         {
 
         }
-        private void AddProduct(long barcode, int quantity)
+        public void AddProduct(long barcode, int quantity)
         {
 
         }
-        private Product BuyProduct(long barcode)
+        public Product BuyProduct(long barcode)
         {
 
         }
-        private List<Product> BuyProducts(long barcode, int quantity)
+        public List<Product> BuyProducts(long barcode, int quantity)
         {
 
         }
-        private string ToString()
+        public string ToString()
         {
 
         }

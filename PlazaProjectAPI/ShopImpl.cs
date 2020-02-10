@@ -6,14 +6,18 @@ namespace PlazaProjectAPI
 {
     class ShopImpl : Shop
     {
-        public string name { get; set; }
-        public string owner { get; set; }
-        public Dictionary<long, ShopImpl.ShopEntryImpl> products;
+        private string name { get; set; }
+        private string owner { get; set; }
+        private Dictionary<long, ShopImpl.ShopEntryImpl> products;
         
-        private ShopImpl(string name, string owner)
+        public ShopImpl(string name, string owner)
         {
             this.name = name;
             this.owner = owner;
+        }
+        private class ShopEntryImpl
+        {
+
         }
 
     }

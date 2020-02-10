@@ -4,38 +4,38 @@ using System.Text;
 
 namespace PlazaProjectAPI
 {
-    interface Plaza
+    public interface Plaza
     {
-        private List<Shop> GetShops()
+        public List<Shop> GetShops()
         {
 
         }
-        private void AddShop(Shop shop)
+        public void AddShop(Shop shop)
         {
 
         }
-        private void RemoveShop(Shop shop)
+        public void RemoveShop(Shop shop)
         {
 
         }
-        private Shop FindShopByName(string name)
+        public Shop FindShopByName(string name)
         {
 
         }
-        private bool IsOpen()
+        public bool IsOpen()
         {
 
         }
-        private void Open()
+        public void Open()
         {
 
         }
-        private void Close()
+        public void Close()
         {
 
         }
 
-        private string ToString()
+        public string ToString()
         {
 
         }

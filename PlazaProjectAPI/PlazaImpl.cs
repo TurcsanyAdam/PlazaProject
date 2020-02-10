@@ -4,11 +4,11 @@ using System.Text;
 
 namespace PlazaProjectAPI
 {
-    class PlazaImpl
+    public class PlazaImpl
     {
-        public List<Shop> shops;
+        private List<Shop> shops;
 
-        private PlazaImpl()
+        public PlazaImpl()
         {
 
         }
