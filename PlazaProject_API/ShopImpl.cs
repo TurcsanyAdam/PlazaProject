@@ -4,11 +4,11 @@ using System.Text;
 
 namespace PlazaProject_API
 {
-    class ShopImpl : Shop
+    public class ShopImpl : Shop
     {
         private string name { get; }
         private string owner { get;}
-        private Dictionary<long, ShopImpl.ShopEntryImpl> products;
+        private Dictionary<long, ShopEntryImpl> products;
         
         public ShopImpl(string name, string owner)
         {
@@ -36,10 +36,6 @@ namespace PlazaProject_API
             {
                 quantity -= amount;
             }
-            public override string ToString()
-            {
-                return base.ToString();
-            }
 
         }
 
@@ -61,7 +57,11 @@ namespace PlazaProject_API
 
         public List<Product> GetProducts()
         {
-            throw new NotImplementedException();
+            List<Product> onlyProductsList = new List<Product>();
+            foreach(KeyValuePair<long, ShopEntryImpl> kvp in products)
+            {
+                kvp.Value.
+            }
         }
 
         public Product FindByName(string name)
@@ -107,6 +107,11 @@ namespace PlazaProject_API
         public string GetOwner()
         {
             return owner;
+        }
+        public override string ToString()
+        {
+            string result = name + " - " + owner;
+            return result;
         }
     }
 }

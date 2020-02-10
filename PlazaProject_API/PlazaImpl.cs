@@ -6,11 +6,13 @@ namespace PlazaProject_API
 {
     public class PlazaImpl:Plaza
     {
-        private List<Shop> shops;
+        private bool isOpen = false;
+        private List<Shop> shops = new List<Shop>();
+        private string plazaName;
 
-        public PlazaImpl()
+        public PlazaImpl(string plazaName)
         {
-
+            this.plazaName = plazaName;
         }
 
         public void AddShop(Shop shop)
@@ -20,7 +22,7 @@ namespace PlazaProject_API
 
         public void Close()
         {
-            throw new NotImplementedException();
+            isOpen = false;
         }
 
         public Shop FindShopByName(string name)
@@ -42,22 +44,26 @@ namespace PlazaProject_API
 
         public List<Shop> GetShops()
         {
-            throw new NotImplementedException();
+            return shops;
         }
 
         public bool IsOpen()
         {
-            throw new NotImplementedException();
+            return isOpen;
         }
 
         public void Open()
         {
-            throw new NotImplementedException();
+            isOpen = true;
         }
 
         public void RemoveShop(Shop shop)
         {
             throw new NotImplementedException();
+        }
+        public override string ToString()
+        {
+            return plazaName;
         }
     }
 }
