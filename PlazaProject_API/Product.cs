@@ -10,11 +10,24 @@ namespace PlazaProject_API
         protected string name { get; set; }
         protected string manufacturer { get; set; }
         protected Product ()
-        { 
+        {
+        }
+
+        public long getBarcode()
+        {
+            return barcode;
+        }
+        public string getName()
+        {
+            return name;
+        }
+        public string getManufacturer()
+        {
+            return manufacturer;
         }
         public override string ToString()
         {
-            return base.ToString();
+            return name + "-" + barcode;
         }
     }
 }

@@ -17,7 +17,22 @@ namespace PlazaProject_API
 
         public void AddShop(Shop shop)
         {
-            shops.Add(shop);
+            if (isOpen)
+            {
+                if (!shops.Contains(shop))
+                {
+                    shops.Add(shop);
+
+                }
+                else
+                {
+                    throw new ShopAlreadyExistsException("This shop already exists");
+                }
+            }
+            else
+            {
+                throw new PlazaIsClosedException("Plaza is closed");
+            }
         }
 
         public void Close()
@@ -27,19 +42,21 @@ namespace PlazaProject_API
 
         public Shop FindShopByName(string name)
         {
-            foreach(Shop shop in shops)
+            if (isOpen)
             {
-                if(shop.GetName() == name)
+                foreach (Shop shop in shops)
                 {
-                    return shop;
+                    if (shop.GetName() == name)
+                    {
+                        return shop;
+                    }
                 }
-                else
-                {
-                    throw new Exception();
-                }
+                throw new NoSuchShopException("This shop doesn't exist");
             }
-            throw new Exception();
-
+            else
+            {
+                throw new PlazaIsClosedException("Plaza is closed");
+            }
         }
 
         public List<Shop> GetShops()
@@ -59,7 +76,22 @@ namespace PlazaProject_API
 
         public void RemoveShop(Shop shop)
         {
-            throw new NotImplementedException();
+            if (isOpen)
+            {
+                if (shops.Contains(shop))
+                {
+                    shops.Remove(shop);
+
+                }
+                else
+                {
+                    throw new NoSuchShopException("This shop doesn't exist");
+                }
+            }
+            else
+            {
+                throw new PlazaIsClosedException("Plaza is closed");
+            }
         }
         public override string ToString()
         {

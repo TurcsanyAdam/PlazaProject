@@ -6,21 +6,25 @@ namespace PlazaProject_API
 {
     public class ShopImpl : Shop
     {
+        private bool isOpen { get; set; }
         private string name { get; }
         private string owner { get;}
         private Dictionary<long, ShopEntryImpl> products;
+        private Random random;
         
         public ShopImpl(string name, string owner)
         {
             this.name = name;
             this.owner = owner;
+            products = new Dictionary<long, ShopEntryImpl>();
+            random = new Random();
         }
         private class ShopEntryImpl
         {
-            private Product product { get; set; }
-            private int quantity { get; set; }
-            private float price { get; set; }
-            private ShopEntryImpl(Product product, int quantity, float price)
+            public Product product { get; set; }
+            public int quantity { get; set; }
+            public float price { get; set; }
+            public ShopEntryImpl(Product product, int quantity, float price)
             {
                 this.product = product;
                 this.quantity = quantity;
@@ -42,61 +46,196 @@ namespace PlazaProject_API
 
         public bool IsOpen()
         {
-            throw new NotImplementedException();
+            return isOpen;
         }
 
         public void Open()
         {
-            throw new NotImplementedException();
+            isOpen = true;
         }
 
         public void Close()
         {
-            throw new NotImplementedException();
+            isOpen = false;
         }
 
         public List<Product> GetProducts()
         {
-            List<Product> onlyProductsList = new List<Product>();
-            foreach(KeyValuePair<long, ShopEntryImpl> kvp in products)
+            if (isOpen)
             {
-                kvp.Value.
+                List<Product> onlyProductsList = new List<Product>();
+                foreach (KeyValuePair<long, ShopEntryImpl> kvp in products)
+                {
+                    onlyProductsList.Add(kvp.Value.product);
+                }
+                return onlyProductsList;
             }
+            else
+            {
+                throw new ShopIsClosedException("Shop is closed!");
+            }
+
         }
 
         public Product FindByName(string name)
         {
-            throw new NotImplementedException();
+            if (isOpen)
+            {
+                foreach (KeyValuePair<long, ShopEntryImpl> kvp in products)
+                {
+                    if (kvp.Value.product.getName() == name)
+                    {
+                        return kvp.Value.product;
+                    }
+                }
+                throw new NoSuchProductException("There is no such product");
+            }
+            else
+            {
+                throw new ShopIsClosedException("Shop is closed");
+            }
+
         }
 
         public bool HasProduct(long barcode)
         {
-            throw new NotImplementedException();
+            if (isOpen)
+            {
+                foreach (KeyValuePair<long, ShopEntryImpl> kvp in products)
+                {
+                    if (kvp.Key == barcode)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+
+            }
+            else
+            {
+                throw new ShopIsClosedException("Shop is closed");
+            }
         }
 
         public void AddNewProduct(Product product, int quantity, float price)
         {
-            throw new NotImplementedException();
+            long randomBarcode = product.getBarcode();
+            if (isOpen)
+            {
+                if (!products.ContainsKey(randomBarcode))
+                {
+                    products.Add(randomBarcode, new ShopEntryImpl(product, quantity, price));
+                }
+                else
+                {
+                    throw new ProductAlreadyExistsException("This product already exists");
+                }
+            }
+            else
+            {
+                throw new ShopIsClosedException("Shop is closed");
+            }
+
         }
 
         public void AddProduct(long barcode, int quantity)
         {
-            throw new NotImplementedException();
+            if (isOpen)
+            {
+                foreach (KeyValuePair<long, ShopEntryImpl> kvp in products)
+                {
+                    if (kvp.Key == barcode)
+                    {
+                        kvp.Value.IncreaseQuantity(quantity);
+                        break;
+                    }
+                    throw new ProductAlreadyExistsException("This product already exists");
+                }
+            }
+            else
+            {
+                throw new ShopIsClosedException("Shop is closed");
+            }
+
         }
 
         public Product BuyProduct(long barcode)
         {
-            throw new NotImplementedException();
+            if (isOpen)
+            {
+                foreach (KeyValuePair<long, ShopEntryImpl> kvp in products)
+                {
+                    if (kvp.Key == barcode)
+                    {
+                        if(kvp.Value.quantity >= 1)
+                        {
+                            kvp.Value.DecreaseQuantity(1);
+                            return kvp.Value.product;
+                        }
+                        else
+                        {
+                            throw new OutOfStockException("Out of stock");
+                        }
+                        
+                    }
+                }
+                throw new ProductAlreadyExistsException("This product already exists");
+            }
+            else
+            {
+                throw new ShopIsClosedException("Shop is closed");
+            }
         }
 
         public List<Product> BuyProducts(long barcode, int quantity)
         {
-            throw new NotImplementedException();
+            if (isOpen)
+            {
+                List<Product> boughtProducts = new List<Product>();
+                foreach (KeyValuePair<long, ShopEntryImpl> kvp in products)
+                {
+                    if (kvp.Key == barcode)
+                    {
+                        if (kvp.Value.quantity >= quantity)
+                        {
+                            kvp.Value.DecreaseQuantity(quantity);
+                            for (int i = 0; i < quantity; i++)
+                            {
+                                boughtProducts.Add(kvp.Value.product);
+                            }
+                        }
+                        else
+                        {
+                            throw new OutOfStockException("Out of stock");
+                        }
+
+                    }
+                }
+                throw new ProductAlreadyExistsException("This product already exists");
+            }
+            else
+            {
+                throw new ShopIsClosedException("Shop is closed");
+            }
         }
 
         public float GetPrice(long barcode)
         {
-            throw new NotImplementedException();
+            if (isOpen)
+            {
+                foreach (KeyValuePair<long, ShopEntryImpl> kvp in products)
+                {
+                    if (kvp.Key == barcode)
+                    {
+                        return kvp.Value.price;
+                    }
+                }
+                throw new NoSuchProductException("There is no such product");
+            }
+            else
+            {
+                throw new ShopIsClosedException("Shop is closed");
+            }
         }
 
         public string GetName()

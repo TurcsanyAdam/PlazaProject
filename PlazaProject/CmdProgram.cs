@@ -12,6 +12,8 @@ namespace PlazaProject
 
         public CmdProgram(string[] args)
         {
+            cart = new List<Product>();
+            prices = new List<float>();
 
         }
 
@@ -32,7 +34,8 @@ namespace PlazaProject
                     string plazaName = Console.ReadLine();
                     plaza = new PlazaImpl(plazaName);
                     Console.Clear();
-                    string secondMenu = $"Welcome to the {plaza.ToString()}! Press\n" +
+                    string secondMenu = 
+                   $"Welcome to the {plaza.ToString()}! Press\n" +
                     "1) to list all shops.\n" +
                     "2) to add a new shop.\n" +
                     "3) to remove an existing shop.\n" +
@@ -70,10 +73,11 @@ namespace PlazaProject
                                 plaza.RemoveShop(plaza.FindShopByName(storeToBeRemoved));
                                 break;
                             case ConsoleKey.D4:
-                                Console.Write("Enter the name of the store you want to remove here: ");
+                                Console.Write("Enter the name of the store you want to go into: ");
                                 string storeToBeUsed = Console.ReadLine();
                                 ShopImpl currentShop = (ShopImpl)plaza.FindShopByName(storeToBeUsed);
-                                string thirdMenu = $"Hi! This is the {currentShop.ToString()} , welcome! Press\n" +
+                                string thirdMenu = 
+                                                   "Hi! This is the {currentShop.ToString()} , welcome! Press\n" +
                                                    "1) to list available products.\n" +
                                                    "2) to find products by name.\n" +
                                                    "3) to display the shop's owner.\n" +
@@ -93,32 +97,89 @@ namespace PlazaProject
                                     switch (inputThirdMenu.Key)
                                     {
                                         case ConsoleKey.D1:
-                                            foreach(KeyValuePair kvp in currentShop.GetProducts)
+                                            foreach(Product product in currentShop.GetProducts())
+                                            {
+                                                Console.WriteLine(product.ToString());
+                                            }
+                                            Console.ReadLine();
                                             break;
                                         case ConsoleKey.D2:
+                                            Console.Write("Enter the name of the product you want to find");
+                                            string productToBeFound = Console.ReadLine();
+                                            currentShop.FindByName(productToBeFound);
                                             break;
                                         case ConsoleKey.D3:
+                                            Console.WriteLine(currentShop.GetOwner());
+                                            Console.ReadLine();
                                             break;
                                         case ConsoleKey.D4:
+                                            currentShop.Open();
                                             break;
                                         case ConsoleKey.D5:
+                                            currentShop.Close();
                                             break;
                                         case ConsoleKey.D6:
+                                            Console.Write("What kind of product would you like to add? (clothing/food)");
+                                            string whatProductToAdd = Console.ReadLine();
+                                            if(whatProductToAdd == "clothing")
+                                            {
+                                                Console.Write("Enter barcode here:");
+                                                long barcodeToAddClothing = long.Parse(Console.ReadLine());
+                                                Console.Write("Enter name here:");
+                                                string nameToAddClothing = Console.ReadLine();
+                                                Console.Write("Enter manufacturer here:");
+                                                string manufacturerToAddClothing = Console.ReadLine();
+                                                Console.Write("Enter material here:");
+                                                string materialToAddClothing = Console.ReadLine();
+                                                Console.Write("Enter type here:");
+                                                string typeToAddClothing = Console.ReadLine();
+                                                Product clothingProductToAdd = new ClothingProduct(barcodeToAddClothing, nameToAddClothing, manufacturerToAddClothing, materialToAddClothing, typeToAddClothing);
+                                                currentShop.AddNewProduct(clothingProductToAdd, 10 , 230);
+                                                break;
+                                            }
+                                            else if (whatProductToAdd == "food")
+                                            {
+                                                Console.Write("Enter barcode here:");
+                                                long barcodeToAddFood = long.Parse(Console.ReadLine());
+                                                Console.Write("Enter name here:");
+                                                string nameToAddFood = Console.ReadLine();
+                                                Console.Write("Enter manufacturer here:");
+                                                string manufacturerToAddFood = Console.ReadLine();
+                                                Console.Write("Enter calories here:");
+                                                int caloriesToAddFood = int.Parse(Console.ReadLine());
+                                                DateTime date = new DateTime(2020, 1, 1);
+                                                Product foodProductToAdd = new FoodProduct(barcodeToAddFood, nameToAddFood, manufacturerToAddFood, caloriesToAddFood, date);
+                                                currentShop.AddNewProduct(foodProductToAdd, 110, 2300);
+                                                break;
+                                            }
+
                                             break;
                                         case ConsoleKey.D7:
+                                            Console.Write("Enter barcode here:");
+                                            int barcodeToAdd = int.Parse(Console.ReadLine());
+                                            Console.Write("Enter amount here:");
+                                            int amountToAdd = int.Parse(Console.ReadLine());
+                                            currentShop.AddProduct(barcodeToAdd, amountToAdd);
                                             break;
                                         case ConsoleKey.D8:
+                                            Console.Write("Enter barcode here:");
+                                            int barcodeToBuy = int.Parse(Console.ReadLine());
+                                            Product boughtProduct = currentShop.BuyProduct(barcodeToBuy);
+                                            cart.Add(boughtProduct);
+                                            prices.Add(currentShop.GetPrice(barcodeToBuy));
                                             break;
                                         case ConsoleKey.D9:
+                                            Console.Write("Enter barcode here:");
+                                            int barcodeToGetThePriceOf = int.Parse(Console.ReadLine());
+                                            currentShop.GetPrice(barcodeToGetThePriceOf);
                                             break;
                                         case ConsoleKey.N:                                            
                                             break;
                                     }
-                                    break;
                                 }
-                                break;
                             case ConsoleKey.D5:
                                 Console.WriteLine(plaza.IsOpen());
+                                Console.ReadLine();
                                 break;
                             case ConsoleKey.D6:
                                 plaza.Open();
@@ -135,7 +196,6 @@ namespace PlazaProject
                         }
                     }
                     
-                    break;
                 case ConsoleKey.D2:
                     Environment.Exit(0);
                     break;

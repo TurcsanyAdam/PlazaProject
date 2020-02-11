@@ -17,9 +17,5 @@ namespace PlazaProject_API
             this.bestBefore = bestBefore;
         }
 
-        public override string ToString()
-        {
-            return base.ToString();
-        }
     }
 }
